@@ -34,4 +34,4 @@ nn.train(input, desiredOutput, minibatch: input.count.rows, nEpochs: 100000, lea
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.txt) file for details
