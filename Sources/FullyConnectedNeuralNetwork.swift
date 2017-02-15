@@ -1,9 +1,6 @@
 //
 //  FullyConnectedNeuralNetwork.swift
-//  BPNeuralNetwork
-//
 //  Created by Dmitry Vodianyk on 1/18/17.
-//  Copyright © 2017 Dmitry Vodianyk. All rights reserved.
 //
 
 import Foundation

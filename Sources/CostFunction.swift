@@ -1,9 +1,6 @@
 //
 //  CostFunction.swift
-//  BPNeuralNetwork
-//
 //  Created by Dmitry Vodianyk on 2/15/17.
-//  Copyright © 2017 Dmitry Vodianyk. All rights reserved.
 //
 
 import Foundation
