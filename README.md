@@ -29,7 +29,14 @@ nn.train(input, desiredOutput, minibatch: input.count.rows, nEpochs: 100000, lea
         print(nn.run(input))
     }
 }
+```
 
+The [cross-entropy](https://en.wikipedia.org/wiki/Cross_entropy) cost function is used by default. The [quadratic](https://en.wikipedia.org/wiki/Loss_function#Quadratic_loss_function) cost function can be set manually once a neural network is initialized:
+
+
+```
+let nn = FullyConnectedNeuralNetwork(shape: [2, 3, 1])
+nn.costFunction = QuadraticCost()
 ```
 
 ## License

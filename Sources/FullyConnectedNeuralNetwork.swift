@@ -11,6 +11,7 @@ import Foundation
 class FullyConnectedNeuralNetwork {
     
     var weights = [Matrix]()
+    var costFunction: CostFunction
     
     init(shape: [Int]) {
         var previous = -1
@@ -21,6 +22,7 @@ class FullyConnectedNeuralNetwork {
             }
             previous = value
         }
+        self.costFunction = CrossEntropyCost()
     }
     
     func run(_ input: Matrix) -> Matrix {
@@ -73,7 +75,7 @@ class FullyConnectedNeuralNetwork {
         }
         
         // backpropagation
-        var delta = (activations.last! - desiredOutput) * zVectors.last!.sigmoidPrime()
+        var delta = self.costFunction.delta(output: activations.last!, desiredOutput: desiredOutput, zValue: zVectors.last!)
         var gradients = [ activations[activations.count - 2].T().dot(delta) ]
         
         for i in 2 ..< self.weights.count + 1 {
@@ -88,6 +90,6 @@ class FullyConnectedNeuralNetwork {
             self.weights[index] = self.weights[index] - (gradient * learningRate)
         }
         
-        return 0.5 * ((desiredOutput - activations.last!).pow2().sumElements())
+        return self.costFunction.calculate(output: activations.last!, desiredOutput: desiredOutput)
     }
 }

@@ -72,6 +72,12 @@ extension Matrix {
         vDSP_mtransD(self.grid, 1, &resultGrid, 1, vDSP_Length(self.count.columns), vDSP_Length(self.count.rows))
         return Matrix(self.count.columns, self.count.rows, resultGrid)
     }
+    
+    func ln() -> Matrix {
+        var resultGrid = [Double](repeating: 0.0, count: self.countTotal)
+        vvlog(&resultGrid, self.grid, [Int32(self.countTotal)])
+        return Matrix(self.count.columns, self.count.rows, resultGrid)
+    }
 }
 
 // MARK: operators
@@ -82,11 +88,20 @@ extension Matrix {
         vDSP_vsubD(right.grid, 1, left.grid, 1, &resultGrid, 1, vDSP_Length(left.countTotal))
         return Matrix(left.count.rows, left.count.columns, resultGrid)
     }
+    static func - (left: Double, right: Matrix) -> Matrix {
+        let leftGrid = [Double](repeating : left, count : right.countTotal)
+        var resultGrid = [Double](repeating : 0.0, count : right.countTotal)
+        vDSP_vsubD(right.grid, 1, leftGrid, 1, &resultGrid, 1, vDSP_Length(right.countTotal))
+        return Matrix(right.count.rows, right.count.columns, resultGrid)
+    }
     static func * (left: Matrix, right: Double) -> Matrix {
         var resultGrid = [Double](repeating : 0.0, count : left.countTotal)
         var s = right
         vDSP_vsmulD(left.grid, 1, &s, &resultGrid, 1, vDSP_Length(left.countTotal))
         return Matrix(left.count.rows, left.count.columns, resultGrid)
+    }
+    static func * (left: Double, right: Matrix) -> Matrix {
+        return right * left
     }
     static func * (left: Matrix, right: Matrix) -> Matrix {
         var resultGrid = [Double](repeating : 0.0, count : left.countTotal)
