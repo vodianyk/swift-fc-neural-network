@@ -73,7 +73,7 @@ extension Matrix {
     func ln() -> Matrix {
         var resultGrid = [Double](repeating: 0.0, count: self.countTotal)
         vvlog(&resultGrid, self.grid, [Int32(self.countTotal)])
-        return Matrix(self.count.columns, self.count.rows, resultGrid)
+        return Matrix(self.count.rows, self.count.columns, resultGrid)
     }
 }
 
